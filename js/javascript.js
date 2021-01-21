@@ -24,15 +24,15 @@ function openBtn(id) {
 }
 
 function closeBtn() {
-    closeBtnContent();
-    resetBtnImgSrc();
+    if(previousID) {
+        closeBtnContent();
+        resetBtnImgSrc();
+    }
 }
 function closeBtnContent(){
     contents.forEach(content => content.classList.remove("show"));
 }
 function resetBtnImgSrc() {
-    if(previousID) {
-        let img = document.querySelector(`#${previousID}img`);
-        img.src = "img/plus.png";
-    }
+    let img = document.querySelector(`#${previousID}img`);
+    img.src = "img/plus.png";
 }
