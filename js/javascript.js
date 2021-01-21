@@ -1,29 +1,38 @@
-    const buttons = document.querySelectorAll(".sectionFourButtons");
-    const contents = document.querySelectorAll(".sectionFourButtonContent")
-    let previousID = "";
+const buttons = document.querySelectorAll(".sectionFourButtons");
+const contents = document.querySelectorAll(".sectionFourButtonContent")
+let previousID = "";
 
-    buttons.forEach(button => button.addEventListener("click", selectButton));
+buttons.forEach(button => button.addEventListener("click", selectButton));
 
-    function selectButton(e){
-        closeButtonContent();
-      
-        if(previousID !== this.id){
-
-            const buttonContent = document.querySelector(`#${this.id}Content`);
-            buttonContent.classList.add("show");
-            previousID = this.id;
-
-            document.querySelector(`#${this.id}img`).src="img/close.png";
-        }
-        else{
-            closeButtonContent();
-            previousID = "";
-            
-            document.querySelector(`#${this.id}img`).src="img/plus.png";
-        }
+function selectButton(){
+    closeBtn();
+    
+    if(previousID !== this.id){
+        openBtn(this.id);
+        previousID = this.id;
     }
-
-    function closeButtonContent(){
-        contents.forEach(content => content.classList.remove("show"))
+    else{
+        previousID = "";
     }
+}
 
+function openBtn(id) {
+    const buttonContent = document.querySelector(`#${id}Content`);
+    buttonContent.classList.add("show");
+
+    document.querySelector(`#${id}img`).src="img/close.png";
+}
+
+function closeBtn() {
+    closeBtnContent();
+    resetBtnImgSrc();
+}
+function closeBtnContent(){
+    contents.forEach(content => content.classList.remove("show"));
+}
+function resetBtnImgSrc() {
+    if(previousID) {
+        let img = document.querySelector(`#${previousID}img`);
+        img.src = "img/plus.png";
+    }
+}
